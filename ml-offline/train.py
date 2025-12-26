@@ -1,22 +1,24 @@
 import torch
 from torch.utils.data import DataLoader
 from preprocessing.dataset import ImageDataset
-from models.cnn_detector import CNNDetector
+from models.fusion_detector import FusionDetector
 
 dataset = ImageDataset("data")
-loader = DataLoader(dataset, batch_size=4, shuffle=True)
+loader = DataLoader(dataset, batch_size=2, shuffle=True)
 
-model = CNNDetector()
+model = FusionDetector()
 loss_fn = torch.nn.CrossEntropyLoss()
-# print(sum(p.numel() for p in model.parameters()))
-optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+optimizer = torch.optim.Adam(model.parameters(), lr=0.0001)
+
+print("Trainable parameters:", 
+    sum(p.numel() for p in model.parameters()))
 
 for epoch in range(5):
-    total_loss = 0
+    total_loss = 0.0
 
-    for images, labels in loader:
+    for images, fft, labels in loader:
         optimizer.zero_grad()
-        outputs = model(images)
+        outputs = model(images, fft)
         loss = loss_fn(outputs, labels)
         loss.backward()
         optimizer.step()
