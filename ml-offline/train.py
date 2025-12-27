@@ -1,4 +1,5 @@
 import torch
+import os
 from torch.utils.data import DataLoader
 from preprocessing.dataset import ImageDataset
 from models.fusion_detector import FusionDetector
@@ -24,3 +25,9 @@ for epoch in range(5):
         optimizer.step()
         total_loss += loss.item()
     print(f"Epoch {epoch+1}, Loss: {total_loss:.4f}")
+
+# Save the trained model
+os.makedirs("checkpoints", exist_ok=True)
+
+torch.save(model.state_dict(), "checkpoints/fusion_model.pt")
+print("Fusion model saved to checkpoints/fusion_model.pt")
