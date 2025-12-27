@@ -40,6 +40,7 @@ def evaluate(model, val_loader):
     correct = 0
     total = 0
     total_loss = 0.0
+    
 
     with torch.no_grad(): # no gradients needed
         for images, fft, labels in val_loader:
