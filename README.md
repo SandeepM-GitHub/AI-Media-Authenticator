@@ -1,5 +1,17 @@
-# AI-Media-Authenticator
-On-device AI media forensics for Android.
+## AI Media Authenticator
+
+An offline AI-generated image/video detection system.
+
+### Features
+- PyTorch-based CNN + FFT fusion model
+- Exported to ONNX with external weights
+- On-device inference using ONNX Runtime (Android)
+- Fully offline, privacy-preserving
+
+### Status
+- ✅ Model training completed
+- ✅ Android ONNX inference working
+- 🚧 FFT feature extraction on Android (in progress)
 
 
 
