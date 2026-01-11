@@ -20,10 +20,10 @@ class FFTFeatureExtractor:
         magnitude = np.log(np.abs(fshift) + 1)
 
         # Normalize
-        magnitude = magnitude / np.max(magnitude)
+        # magnitude = magnitude / np.max(magnitude)
         magnitude = cv2.resize(magnitude, (32, 32))
 
         # Reduce to compact feature
-        flat = magnitude.flatten()
-        flat = (flat - flat.mean()) / (flat.std() + 1e-8)
+        flat = magnitude.flatten().astype(np.float32)
+        # flat = (flat - flat.mean()) / (flat.std() + 1e-8)
         return flat
